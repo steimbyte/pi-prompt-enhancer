@@ -2,6 +2,28 @@
 
 **Pi Agent Extension** – Verbessert Prompts per KI im Hintergrund.
 
+## Problem
+
+Man schreibt schnell einen Prompt, der ist aber unklar/unkonzise. Umformulieren kostet Zeit.
+
+## Lösung
+
+`/enhance <prompt>` → KI verbessert den Prompt automatisch.
+
+## Workflow
+
+```
+Du: /enhance schreib mir eine funktion die daten parsed
+     ↓
+Plugin: Ruft KI auf (mit deinem aktuellen Model)
+     ↓
+Widget zeigt: Spinner + Model-Name über dem Editor
+     ↓
+KI gibt optimierten Prompt zurück
+     ↓
+Plugin: Sendet als User-Message → LLM wird getriggert
+```
+
 ## Features
 
 - `/enhance <prompt>` – Prompt wird mit dem aktuell ausgewählten Model optimiert
@@ -30,13 +52,12 @@ ln -s ~/pi-prompt-enhancer/prompt-enhancer.ts ~/.pi/agent/extensions/prompt-enha
 /reload
 ```
 
-## Verwendung
+## Vorteile
 
-```
-/enhance schreib mir eine funktion die daten parsed
-```
-
-Der optimierte Prompt erscheint automatisch im Chat und das LLM wird getriggert.
+- Schneller als selber umformulieren
+- Nutzt dein bereits ausgewähltes Model
+- Widget zeigt transparent was passiert
+- Ergebnis direkt im Chat zum Übernehmen/Verwerfen
 
 ## Requirements
 
