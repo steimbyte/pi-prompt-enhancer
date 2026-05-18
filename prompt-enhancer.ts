@@ -12,15 +12,8 @@ import type { ExtensionAPI } from "@mariozechner/pi-coding-agent";
 import { complete } from "@earendil-works/pi-ai";
 
 const ENHANCE_PROMPT = `Du bist ein Prompt-Optimierer.
-
-REGELN:
-- Mache den Prompt KLARER und PRÄZISER
-- Strukturiere logisch: Kontext → Ziel → Einschränkungen
-- Entferne Füllwörter
-- Behalte originale Intention
-- Maximal 500 Zeichen
-
-Antworte NUR mit dem verbesserten Prompt, keine Erklärung, keine Einleitung.`;
+Der User gibt dir einen beliebigen Prompt. Stelle sicher, dass der Prompt sauber geschrieben, gut strukturiert ist.
+Gib dann den sauberen Prompt zurück ohne alles andere.`;
 
 const spinners = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧"];
 let spinnerIndex = 0;
