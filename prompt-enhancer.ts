@@ -112,14 +112,26 @@ export default function promptEnhancer(pi: ExtensionAPI) {
         clearInterval(spinnerIntervalId);
         stopSpinner();
 
-        const enhancedPrompt = response.content
-          .filter((c): c is { type: "text"; text: string } => c.type === "text")
-          .map(c => c.text)
+        // Text extrahieren (nur text type, KEIN thinking)
+        const rawText = response.content
+          .filter((c) => c.type === "text" && typeof c.text === "string")
+          .map((c) => (c as { type: "text"; text: string }).text)
           .join("\n")
           .trim();
 
         // Widget ausblenden
         ctx.ui.setWidget("enhance-spinner", []);
+
+        // Versuche JSON-Parsing zu erkennen und nur den reinen Text nehmen
+        let enhancedPrompt = rawText;
+        try {
+          // Prüfe ob es ein JSON-String ist
+          const parsed = JSON.parse(rawText);
+          // Wenn ja, nimm es als Plain Text (der User will nur den Prompt)
+          enhancedPrompt = rawText;
+        } catch {
+          // Kein JSON, passt
+        }
 
         if (!enhancedPrompt) {
           ctx.ui.notify("Keine Antwort vom Model", "error");
